@@ -1,4 +1,0 @@
-socialstatstracker
-==================
-
-Social Stats Tracker
