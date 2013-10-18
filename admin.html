@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block pagecontent %}
+            <div class="row">
+                <div class="span6">
+                    <a class="btn btn-large btn-primary" href="/admin/refresh">Refresh stats</a> <a href="/">Go to public view</a>
+                    <br/><br/>
+                </div>
+                <div class="span6">
+                    
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="span4">
+                    <h2>Facebook</h2>
+                    <h3>WWF</h3>
+                    <form method="post" action="/admin/add">
+                        <input type="hidden" name="account_type" value="facebook" />
+                        <input type="hidden" name="grouping" value="wwf" />
+                        <div class="input-append">
+                            <input class="span2" name="account_username" type="text" placeholder="e.g. wwfunitedkingdom">
+                            <button class="btn" type="sumbit">Add +</button>
+                        </div>
+                    </form>         
+                    <ol>           
+                        {% for social_account in all_social_accounts %}
+                            {% if social_account.account_type == 'facebook' and  social_account.grouping == 'wwf' %}
+                                <li>
+                                    <a href="http://www.facebook.com/{{social_account.account_username}}" target="_blank" title="Open page in a new window">{{social_account.account_username}}</a>                                    
+                                    (<small><a class="text-error" href="/admin/delete/{{social_account.key.id()}}" title="No undo">delete</a></small>)
+                                </li>
+                            {% endif %}  
+                        {% endfor %}    
+                    </ol>
+                    <hr />
+                    <h3>Earth Hour</h3>
+                    <form method="post" action="/admin/add">
+                        <input type="hidden" name="account_type" value="facebook" />
+                        <input type="hidden" name="grouping" value="earthhour" />
+                        <div class="input-append">
+                            <input class="span2" name="account_username" type="text">
+                            <button class="btn" type="sumbit">Add +</button>
+                        </div>
+                    </form>  
+                    <ol>           
+                        {% for social_account in all_social_accounts %}
+                            {% if social_account.account_type == 'facebook' and  social_account.grouping == 'earthhour' %}
+                                <li>
+                                    <a href="http://www.facebook.com/{{social_account.account_username}}" target="_blank" title="Open page in a new window">{{social_account.account_username}}</a>                                    
+                                    (<small><a class="text-error" href="/admin/delete/{{social_account.key.id()}}" title="No undo">delete</a></small>)
+                                </li>
+                            {% endif %}  
+                        {% endfor %}    
+                    </ol>
+                </div>
+
+                <div class="span4">
+                    <h2>Twitter</h2>
+                    <h3>WWF</h3>
+                    <form method="post" action="/admin/add">
+                        <input type="hidden" name="account_type" value="twitter" />
+                        <input type="hidden" name="grouping" value="wwf" />
+                        <div class="input-prepend input-append">
+                            <span class="add-on">@</span>
+                            <input class="span2" name="account_username" type="text" placeholder="e.g. WWFSouthAfrica">
+                            <button class="btn" type="sumbit">Add +</button>
+                        </div>
+                    </form> 
+                    <ol>           
+                        {% for social_account in all_social_accounts %}
+                            {% if social_account.account_type == 'twitter' and  social_account.grouping == 'wwf' %}
+                                <li>
+                                    <a href="http://twitter.com/{{social_account.account_username}}" target="_blank" title="Open this in a new window">@{{social_account.account_username}}</a>                                    
+                                    (<small><a class="text-error" href="/admin/delete/{{social_account.key.id()}}" title="No undo">delete</a></small>)
+                                </li>
+                            {% endif %}  
+                        {% endfor %}
+                    </ol>
+                    <hr />
+                    <h3>Earth Hour</h3>
+                    <form method="post" action="/admin/add">
+                        <input type="hidden" name="account_type" value="twitter" />
+                        <input type="hidden" name="grouping" value="earthhour" />
+                        <div class="input-prepend input-append">
+                            <span class="add-on">@</span>
+                            <input class="span2" name="account_username" type="text">
+                            <button class="btn" type="sumbit">Add +</button>
+                        </div>
+                    </form> 
+                    <ol>           
+                        {% for social_account in all_social_accounts %}
+                            {% if social_account.account_type == 'twitter' and  social_account.grouping == 'earthhour' %}
+                                <li>
+                                    <a href="http://twitter.com/{{social_account.account_username}}" target="_blank" title="Open this in a new window">@{{social_account.account_username}}</a>                                    
+                                    (<small><a class="text-error" href="/admin/delete/{{social_account.key.id()}}" title="No undo">delete</a></small>)
+                                </li>
+                            {% endif %}  
+                        {% endfor %}
+                    </ol>
+                </div>
+
+                <div class="span4">
+                    <h2>YouTube</h2>
+                    <h3>WWF</h3>
+                    <form method="post" action="/admin/add">
+                        <input type="hidden" name="account_type" value="youtube" />
+                        <input type="hidden" name="grouping" value="wwf" />
+                        <div class="input-append">
+                            <input class="span2" name="account_username" type="text" placeholder="e.g. WWFArcticProgramme">
+                            <button class="btn" type="sumbit">Add +</button>
+                        </div>
+                    </form>  
+                    <ol>           
+                        {% for social_account in all_social_accounts %}
+                            {% if social_account.account_type == 'youtube' and  social_account.grouping == 'wwf' %}
+                                <li>
+                                    <a href="http://www.youtube.com/{{social_account.account_username}}" target="_blank" title="Open page in a new window">{{social_account.account_username}}</a>                                    
+                                    (<small><a class="text-error" href="/admin/delete/{{social_account.key.id()}}" title="No undo">delete</a></small>)
+                                </li>
+                            {% endif %}  
+                        {% endfor %}    
+                    </ol>
+                    <hr>
+                    <h3>Earth Hour</h3>
+                    <form method="post" action="/admin/add">
+                        <input type="hidden" name="account_type" value="youtube" />
+                        <input type="hidden" name="grouping" value="earthhour" />
+                        <div class="input-append">
+                            <input class="span2" name="account_username" type="text" placeholder="e.g. WWFArcticProgramme">
+                            <button class="btn" type="sumbit">Add +</button>
+                        </div>
+                    </form>  
+                    <ol>           
+                        {% for social_account in all_social_accounts %}
+                            {% if social_account.account_type == 'youtube' and  social_account.grouping == 'earthhour' %}
+                                <li>
+                                    <a href="http://www.youtube.com/{{social_account.account_username}}" target="_blank" title="Open page in a new window">{{social_account.account_username}}</a>                                    
+                                    (<small><a class="text-error" href="/admin/delete/{{social_account.key.id()}}" title="No undo">delete</a></small>)
+                                </li>
+                            {% endif %}  
+                        {% endfor %}    
+                    </ol>
+                </div>
+
+                <!-- <div class="span3">
+                    <h2>Google+</h2>
+                    <form method="post" action="/admin/add">
+                        <input type="hidden" name="account_type" value="googleplus" />
+                        <div class="input-append">
+                            <input class="span2" name="account_username" type="text" placeholder="e.g. WWFArcticProgramme">
+                            <button class="btn" type="sumbit">Add +</button>
+                        </div>
+                    </form>  
+                    <ol>           
+                        {% for social_account in all_social_accounts %}
+                            {% if social_account.account_type == 'googleplus' %}
+                                <li>
+                                    <a href="https://plus.google.com/+{{social_account.account_username}}" target="none" title="Open page in a new window">{{social_account.account_username}}</a>                                    
+                                    (<small><a class="text-error" href="/admin/delete/{{social_account.key.id()}}" title="No undo">delete</a></small>)
+                                </li>
+                            {% endif %}  
+                        {% endfor %}    
+                    </ol>
+                </div> -->
+
+            </div>
+            
+{% endblock %} 

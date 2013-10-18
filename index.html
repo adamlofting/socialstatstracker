@@ -1,0 +1,333 @@
+{% extends "base.html" %}
+
+{% block pagecontent %}
+                        
+            <div class="row">
+                <div class="span12">
+                    <h2>It's busy at the watering hole...</h2>
+                    <p>This page keeps track of our supporter numbers on key social media channels for <a href="http://wwf.org?src=socialstats" target="_blank">WWF</a> and <a href="http://www.earthhour.org?src=socialstats" target="_blank">Earth Hour</a>. These numbers are updated hourly. <br /></p>                    
+                </div>
+            </div>
+
+            <!-- Totals -->
+
+            <div class="row">
+                <div class="span12">
+                    <h2 class="well">Social Media Statistics WWF + Earth Hour</h2>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="span4">
+                    <h2 class="well well-facebook">{{(totals_wwf.facebook + totals_earthhour.facebook)|format_number()}} <br class="visible-tablet"><span>Facebook  Page Likes</span><br />
+                        
+                    </h2>   
+                </div>
+
+                <div class="span4">
+                    <h2 class="well well-twitter">{{(totals_wwf.twitter + totals_earthhour.twitter)|format_number()}} <br class="visible-tablet"><span>Twitter Followers</span><br />
+                        
+                    </h2> 
+                </div>
+
+                <div class="span4">
+                    <h2 class="well well-youtube">{{(totals_wwf.youtube + totals_earthhour.youtube)|format_number()}} <br class="visible-tablet"><span>YouTube Video views</span><br />
+                        
+                    </h2> 
+                </div>
+                
+            </div><!-- row -->
+
+            <!-- End of totals -->
+
+            <div class="row">
+                <div class="span12">
+                    <h2 class="well">WWF Statistics <span class="pull-right">Scroll down for separate <a href="#earthhourstats" title="Jump down this page to Earth Hour stats">Earth Hour Statistics</a></span></h2>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="span4">
+                    <h2 class="well well-facebook">{{totals_wwf.facebook|format_number()}} <br class="visible-tablet"><span>Facebook Page Likes</span></h2>   
+
+                    <!--<div id="fb-root"></div>
+                    <script>(function(d, s, id) {
+                      var js, fjs = d.getElementsByTagName(s)[0];
+                      if (d.getElementById(id)) return;
+                      js = d.createElement(s); js.id = id;
+                      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=164932913574504";
+                      fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));</script>-->
+
+                    <table class="table table-bordered table-striped table-condensed">                      
+                      <thead>
+                        <tr>                   
+                            <th>Account</th>
+                            <th class="rightCell">Page Likes</th>   
+                            <!-- <th>Action</th>  -->                
+                        </tr>
+                      </thead>
+                      <tbody>
+                        
+                        {% for social_account in all_social_accounts %}
+                            {% if social_account.account_type == 'facebook' and  social_account.grouping == 'wwf'  %}
+                                <tr>
+                                    <td><a href="http://www.facebook.com/{{social_account.account_username}}" target="_blank" title="Open this in a new window">{{social_account.display_name()}}</a></td>
+                                    <td class="rightCell"> {{social_account.count|format_number()}}</td>
+                                    <!-- <td><div class="fb-like" data-href="http://www.facebook.com/{{social_account.account_username}}" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false"></div></td> -->
+                                </tr>       
+                            {% endif %}  
+                        {% endfor %}                        
+                      
+                        <tr>
+                            <td class="rightCell"><strong>Total</strong></td>
+                            <td class="rightCell"><strong>{{totals_wwf.facebook|format_number()}}</strong></td>
+                            <!-- <td></td> -->
+                        </tr> 
+
+                      </tbody>
+                    </table>
+                </div>
+
+                <div class="span4">
+                    <h2 class="well well-twitter">{{totals_wwf.twitter|format_number()}} <br class="visible-tablet"><span>Twitter Followers</span></h2> 
+
+                    <table class="table table-bordered table-striped table-condensed">                      
+                      <thead>
+                        <tr>  
+                            <th>Account</th>
+                            <th class="rightCell">Followers</th>   
+                            <!-- <th>Action</th>  -->                 
+                        </tr>
+                      </thead>
+                      <tbody>
+                        
+                        {% for social_account in all_social_accounts %}
+                            {% if social_account.account_type == 'twitter' and  social_account.grouping == 'wwf'  %}
+                                <tr>
+                                    <td><a href="http://twitter.com/{{social_account.account_username}}" target="_blank" title="Open this in a new window">@{{social_account.display_name()}}</a></td>
+                                    <td class="rightCell"> {{social_account.count|format_number()}}</td>
+                                    <!-- <td><a href="https://twitter.com/{{social_account.account_username}}" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @{{social_account.account_username}}</a></td> -->
+                                </tr>       
+                            {% endif %}  
+                        {% endfor %}    
+
+                        <tr>
+                            <td class="rightCell"><strong>Total</strong></td>
+                            <td class="rightCell"><strong>{{totals_wwf.twitter|format_number()}}</strong></td>
+                            <!-- <td></td> -->
+                        </tr>                     
+                      
+                      </tbody>
+                    </table>
+
+                    <!-- Twitter JS included in last instance of this table -->
+
+                </div>
+
+                <div class="span4">
+                    <h2 class="well well-youtube">{{totals_wwf.youtube|format_number()}} <br class="visible-tablet"><span>YouTube Video views</span></h2> 
+
+                    <table class="table table-bordered table-striped table-condensed">                      
+                      <thead>
+                        <tr>  
+                            <th>Account</th>
+                            <th class="rightCell">Video Views</th>   
+                            <!-- <th>Action</th>  -->                 
+                        </tr>
+                      </thead>
+                      <tbody>
+                        
+                        {% for social_account in all_social_accounts %}
+                            {% if social_account.account_type == 'youtube' and  social_account.grouping == 'wwf'  %}
+                                <tr>
+                                    
+                                    <td><a href="http://www.youtube.com/{{social_account.account_username}}" target="_blank" title="Open this in a new window">{{social_account.display_name()}}</a></td>
+                                    <td class="rightCell"> {{social_account.count|format_number()}}</td>
+                                    <!-- <td><a href="http://www.youtube.com/subscription_center?add_user={{social_account.account_username}}" class="btn btn-mini unbroken">subscribe</a></td> -->
+                                    
+                                </tr>       
+                            {% endif %}  
+                        {% endfor %}   
+
+                        <tr>
+                            <td class="rightCell"><strong>Total</strong></td>
+                            <td class="rightCell"><strong>{{totals_wwf.youtube|format_number()}}</strong></td>
+                            <!-- <td></td> -->
+                        </tr>                      
+                      
+                      </tbody>
+                    </table>
+
+                </div>
+                
+            </div><!-- row -->
+
+
+            <div class="row">
+                <div class="span12">
+                    <h2 class="well" id="earthhourstats">Earth Hour Statistics</h2>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="span4">
+                    <h2 class="well well-facebook">{{totals_earthhour.facebook|format_number()}} <br class="visible-tablet"><span>Facebook Page Likes</span></h2>   
+
+                   <!-- Facebook JS code included in first instance of this table -->
+
+                    <table class="table table-bordered table-striped table-condensed">                      
+                      <thead>
+                        <tr>                   
+                            <th>Account</th>
+                            <th class="rightCell">Page Likes</th>   
+                            <!-- <th>Action</th> -->                 
+                        </tr>
+                      </thead>
+                      <tbody>
+                        
+                        {% for social_account in all_social_accounts %}
+                            {% if social_account.account_type == 'facebook' and  social_account.grouping == 'earthhour'  %}
+                                <tr>
+                                    <td><a href="http://www.facebook.com/{{social_account.account_username}}" target="_blank" title="Open this in a new window">{{social_account.display_name()}}</a></td>
+                                    <td class="rightCell"> {{social_account.count|format_number()}}</td>
+                                    <!-- <td><div class="fb-like" data-href="http://www.facebook.com/{{social_account.account_username}}" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false"></div></td> -->
+                                </tr>       
+                            {% endif %}  
+                        {% endfor %}   
+
+                        <tr>
+                            <td class="rightCell"><strong>Total</strong></td>
+                            <td class="rightCell"><strong>{{totals_earthhour.facebook|format_number()}}</strong></td>
+                            <!-- <td></td> -->
+                        </tr>                      
+                      
+                      </tbody>
+                    </table>
+                </div>
+
+                <div class="span4">
+                    <h2 class="well well-twitter">{{totals_earthhour.twitter|format_number()}} <br class="visible-tablet"><span>Twitter Followers</span></h2> 
+
+                    <table class="table table-bordered table-striped table-condensed">                      
+                      <thead>
+                        <tr>  
+                            <th>Account</th>
+                            <th class="rightCell">Followers</th>   
+                            <!-- <th>Action</th>     -->              
+                        </tr>
+                      </thead>
+                      <tbody>
+                        
+                        {% for social_account in all_social_accounts %}
+                            {% if social_account.account_type == 'twitter' and  social_account.grouping == 'earthhour'  %}
+                                <tr>
+                                    <td><a href="http://twitter.com/{{social_account.account_username}}" target="_blank" title="Open this in a new window">@{{social_account.display_name()}}</a></td>
+                                    <td class="rightCell"> {{social_account.count|format_number()}}</td>
+                                    <!-- <td><a href="https://twitter.com/{{social_account.account_username}}" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @{{social_account.account_username}}</a></td> -->
+                                </tr>       
+                            {% endif %}  
+                        {% endfor %}    
+
+                         <tr>
+                            <td class="rightCell"><strong>Total</strong></td>
+                            <td class="rightCell"><strong>{{totals_earthhour.twitter|format_number()}}</strong></td>
+                            <!-- <td></td> -->
+                        </tr>                      
+                      
+                      </tbody>
+                    </table>
+
+                    <!--
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                    -->
+
+                </div>
+
+                <div class="span4">
+                    <h2 class="well well-youtube">{{totals_earthhour.youtube|format_number()}} <br class="visible-tablet"><span>YouTube Video views</span></h2> 
+
+                    <table class="table table-bordered table-striped table-condensed">                      
+                      <thead>
+                        <tr>  
+                            <th>Account</th>
+                            <th class="rightCell">Video Views</th>   
+                            <!-- <th>Action</th>    -->               
+                        </tr>
+                      </thead>
+                      <tbody>
+                        
+                        {% for social_account in all_social_accounts %}
+                            {% if social_account.account_type == 'youtube' and  social_account.grouping == 'earthhour'  %}
+                                <tr>
+                                    
+                                    <td><a href="http://www.youtube.com/{{social_account.account_username}}" target="_blank" title="Open this in a new window">{{social_account.display_name()}}</a></td>
+                                    <td class="rightCell"> {{social_account.count|format_number()}}</td>
+                                    <!-- <td><a href="http://www.youtube.com/subscription_center?add_user={{social_account.account_username}}" class="btn btn-mini unbroken">subscribe</a></td> -->
+                                    
+                                </tr>       
+                            {% endif %}  
+                        {% endfor %}        
+
+                        <tr>
+                            <td class="rightCell"><strong>Total</strong></td>
+                            <td class="rightCell"><strong>{{totals_earthhour.youtube|format_number()}}</strong></td>
+                            <!-- <td></td> -->
+                        </tr>                  
+                      
+                      </tbody>
+                    </table>
+
+                </div>
+                
+            </div><!-- row -->
+
+             <div class="row">
+                <div class="span12">
+                    <h2 class="well">WWF-China</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="span12">
+                    <p>These figures are <em>not</em> updated automatically. Last updated: 4 July 2013.</p>
+                    <table class="table table-bordered table-striped table-condensed"> 
+                        <tr>
+                            <th>Channel</th>
+                            <th>Supporters</th>
+                            <th>URL</th>                            
+                        </tr>
+                        <tr>
+                            <td>Sina Weibo</td>
+                            <td class="rightCell">137,126</td>
+                            <td><a href="http://www.weibo.com/wwfchina" target="_blank">http://www.weibo.com/wwfchina</a></td>
+                        </tr>
+                        <tr>
+                            <td>Sina Weibo (Earth Hour)</td>
+                            <td class="rightCell">45,636</td>
+                            <td><a href="http://e.weibo.com/diqiuyixiaoshi" target="_blank">http://e.weibo.com/diqiuyixiaoshi</a></td>
+                        </tr>
+                        <tr>
+                            <td>Tencent Weibo</td>
+                            <td class="rightCell">253,475</td>
+                            <td><a href="http://t.qq.com/WWFChina" target="_blank">http://t.qq.com/WWFChina</a></td>
+                        </tr>
+                        <tr>
+                            <td>Renren</td>
+                            <td class="rightCell">6,980</td>
+                            <td><a href="http://page.renren.com/wwfchina/index" target="_blank">http://page.renren.com/wwfchina/index</a></td>
+                        </tr>
+                        <tr>
+                            <td>We Chat</td>
+                            <td class="rightCell">4.121</td>
+                            <td>n/a</td>
+                        </tr>
+                        <tr>
+                            <td class="rightCell"><strong>Total</strong></td>
+                            <td class="rightCell"><strong>447,338</strong></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+{% endblock %} 
