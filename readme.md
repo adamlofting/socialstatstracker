@@ -1,4 +1,4 @@
-WWF Social Stats Tracker
+Social Stats Tracker (built for WWF)
 ===========================================
 
 What does this app do?
@@ -24,10 +24,11 @@ The quality and structure of this code is about right for the amount of work it 
 How to install your own copy, and things to note:
 -------------------------------------------------
 1. Learn how Google App Engine works (it’s a nice system and won’t take long to understand the basics)
-2. Fork this repo (or just take a copy of the code)
-3. Change application name in app.yaml and setup your corresponding named app on Google App Engine
-4. Add your own Twitter API key info into keys_example.py and rename to keys.5
-py. Run the app locally
-6. Modify the HTML to meet your branding needs (you must remove the panda logo or any WWF copyright material - the code is free to use)
-7. You’re unlikely to want the categories of WWF and Earth Hour we use, so you’ll need to modify the logic a little bit for that
+1. Fork this repo (or just take a copy of the code)
+1. Change application name in app.yaml and setup your corresponding named app on Google App Engine
+1. Add your own Twitter API key info into keys_example.py and rename to keys.py
+1. Run the app locally
+1. Modify the HTML to meet your branding needs (you must remove the panda logo or any WWF copyright material - the code is free to use)
+1. You’re unlikely to want the categories of WWF and Earth Hour we use, so you’ll need to modify the logic a little bit for that
 Deploy
+

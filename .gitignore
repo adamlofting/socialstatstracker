@@ -1,5 +1,6 @@
 keys.py
 
+*.pyc
 *.py[cod]
 
 # C extensions
